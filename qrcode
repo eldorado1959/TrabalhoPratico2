@@ -1,0 +1,27 @@
+import qrcode
+
+# Função para gerar o QR Code
+def gerar_qrcode(texto, nome_arquivo="qrcode.png"):
+    # Configurações do QR Code
+    qr = qrcode.QRCode(
+        version=1,  # Tamanho do QR Code (quanto maior o número, mais complexo)
+        error_correction=qrcode.constants.ERROR_CORRECT_L,  # Nível de correção de erros
+        box_size=10,  # Tamanho de cada quadrado
+        border=4,  # Tamanho da borda
+    )
+    
+    # Adiciona os dados
+    qr.add_data(texto)
+    qr.make(fit=True)
+
+    # Cria a imagem do QR Code
+    img = qr.make_image(fill_color="black", back_color="white")
+    
+    # Salva a imagem
+    img.save(nome_arquivo)
+    print(f"QR Code salvo como {nome_arquivo}")
+
+# Exemplo de uso
+texto_qrcode = "https://www.google.com"  # Texto ou link a ser codificado
+gerar_qrcode(texto_qrcode, "meu_qrcode.png")
+
